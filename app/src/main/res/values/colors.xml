@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#a3a3a3</color>
+    <color name="colorAccent">#265cff</color>
+
+    <color name="color_bg">#e27aa0</color>
+
+    <color name="color_bg_pressed">#a93f65</color>
+</resources>
