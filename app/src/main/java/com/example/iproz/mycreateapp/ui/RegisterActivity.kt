@@ -3,12 +3,13 @@ package com.example.iproz.mycreateapp.ui
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import com.example.iproz.mycreateapp.R
-import com.example.iproz.mycreateapp.model.UserModel
 import com.google.firebase.auth.FirebaseAuth
 import com.roger.catloadinglibrary.CatLoadingView
 import kotlinx.android.synthetic.main.activity_register.*
+import kotlinx.android.synthetic.main.toolbar_layout_clear.*
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
@@ -20,6 +21,8 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
+        setSupportActionBar(toolbar_clear)
+
         auth = FirebaseAuth.getInstance()
         mViewLoading = CatLoadingView()
         mViewLoading?.setCanceledOnTouchOutside(false)
@@ -30,6 +33,19 @@ class RegisterActivity : AppCompatActivity() {
             createNewAccount(user, pass)
         }
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_back_out,menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.itemId == R.id.back_out_menu){
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
 
     private fun createNewAccount(email: String, password: String) {
         if (email.trim().isNotEmpty() && password.trim().isNotEmpty()) {
@@ -53,11 +69,6 @@ class RegisterActivity : AppCompatActivity() {
         }else {
             Toast.makeText(this, "กรุณากรอกข้อมูลให้ครบถ้วน", Toast.LENGTH_LONG).show()
         }
-    }
-
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        return super.onCreateOptionsMenu(menu)
     }
 }
 

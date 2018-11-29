@@ -23,6 +23,8 @@ class MainActivity : AppCompatActivity(), ClickRoomListenter {
     private val database = FirebaseFirestore.getInstance()
     val rooms = arrayListOf<RoomModel>()
 
+    lateinit var mAuth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -30,7 +32,6 @@ class MainActivity : AppCompatActivity(), ClickRoomListenter {
         setSupportActionBar(toolbar)
 
         loadRoomData()
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -41,6 +42,11 @@ class MainActivity : AppCompatActivity(), ClickRoomListenter {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item?.itemId == R.id.join_menu){
             startActivity(Intent(this, Join::class.java))
+        }else if (item?.itemId == R.id.logout_menu){
+            mAuth.signOut()
+
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
         }
 
         return super.onOptionsItemSelected(item)

@@ -7,9 +7,10 @@
         android:layout_height="match_parent"
         tools:context=".ui.MainActivity">
 
-    <include layout="@layout/appbar_layout_default"/>
+    <include layout="@layout/toolbar_layout_default"/>
 
     <android.support.v7.widget.RecyclerView
+            android:layout_marginTop="60dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintStart_toStartOf="parent"
