@@ -50,15 +50,18 @@
                     android:layout_weight="1"
                     android:inputType="text"/>
 
-            <EditText
+            <Button
                     android:background="@drawable/button_bg1"
                     android:padding="8dp"
                     android:layout_marginStart="4dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
+                    android:gravity="left"
+                    android:textSize="18dp"
                     android:hint="Date"
                     android:layout_weight="1"
-                    android:inputType="text" android:id="@+id/et_date"/>
+                    android:inputType="text"
+                    android:id="@+id/et_date"/>
 
         </LinearLayout>
 
@@ -88,20 +91,24 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                <EditText
+                <Button
                         android:id="@+id/et_starting"
+                        android:layout_height="40dp"
+                        android:gravity="left"
+                        android:textSize="18dp"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@drawable/button_bg1"
                         android:padding="8dp"
                         android:layout_marginEnd="4dp"
                         android:hint="Time Starting"/>
 
-                <EditText
+                <Button
                         android:id="@+id/et_ending"
+                        android:layout_height="40dp"
+                        android:gravity="left"
+                        android:textSize="18dp"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@drawable/button_bg1"
                         android:padding="8dp"

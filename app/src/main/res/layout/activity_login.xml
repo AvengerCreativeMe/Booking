@@ -52,32 +52,27 @@
                 android:inputType="textPassword"
                 android:padding="8dp"/>
 
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:paddingTop="8dp">
 
-            <Button
-                    android:id="@+id/btn_register"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginEnd="4dp"
-                    android:textColor="#fff"
-                    android:background="@drawable/button_selected"
-                    android:text="Register"/>
+        <Button
+                android:id="@+id/btn_login"
+                android:layout_width="200dp"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:textColor="#fff"
+                android:background="@drawable/button_selected"
+                android:text="SIgn In"/>
 
-            <Button
-                    android:id="@+id/btn_login"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginStart="4dp"
-                    android:textColor="#fff"
-                    android:background="@drawable/button_selected"
-                    android:text="SIgnIn"/>
-        </LinearLayout>
+        <TextView
+                android:id="@+id/btn_register"
+                android:layout_width="200dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/color_bg3"
+                android:text="Register Here!"/>
+
 
     </LinearLayout>
 

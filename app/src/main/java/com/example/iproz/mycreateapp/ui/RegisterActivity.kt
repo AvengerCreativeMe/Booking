@@ -58,9 +58,10 @@ class RegisterActivity : AppCompatActivity() {
                         mViewLoading?.dismiss()
 
                         val currentUser = auth.currentUser
-                        Toast.makeText(this@RegisterActivity, "Create user success. User is $currentUser", Toast.LENGTH_LONG).show()
 
+                        Toast.makeText(this@RegisterActivity, "Create user success. User is $currentUser", Toast.LENGTH_LONG).show()
                         finish()
+
                     }else {
                         mViewLoading?.dismiss()
                         Toast.makeText(this@RegisterActivity, task.exception?.message, Toast.LENGTH_LONG).show()

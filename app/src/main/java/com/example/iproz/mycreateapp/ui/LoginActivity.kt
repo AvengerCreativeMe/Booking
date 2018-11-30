@@ -24,7 +24,6 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         auth = FirebaseAuth.getInstance()
-        auth = FirebaseAuth.getInstance()
         mViewLoading = CatLoadingView()
         mViewLoading?.setCanceledOnTouchOutside(false)
 

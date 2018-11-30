@@ -22,14 +22,9 @@ class MainActivity : AppCompatActivity(), ClickRoomListenter {
 
     private val database = FirebaseFirestore.getInstance()
     val rooms = arrayListOf<RoomModel>()
-
-    lateinit var mAuth: FirebaseAuth
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        mAuth = FirebaseAuth.getInstance()
 
         setSupportActionBar(toolbar)
 
@@ -45,10 +40,7 @@ class MainActivity : AppCompatActivity(), ClickRoomListenter {
         if (item?.itemId == R.id.join_menu){
             startActivity(Intent(this, Join::class.java))
         }else if (item?.itemId == R.id.logout_menu){
-            mAuth.signOut()
-
-            startActivity(Intent(this, LoginActivity::class.java))
-            finish()
+            startActivity(Intent(this, CheckLogout::class.java))
         }
 
         return super.onOptionsItemSelected(item)
