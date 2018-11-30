@@ -51,7 +51,6 @@
                     android:inputType="text"/>
 
             <EditText
-                    android:id="@+id/date"
                     android:background="@drawable/button_bg1"
                     android:padding="8dp"
                     android:layout_marginStart="4dp"
@@ -59,7 +58,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Date"
                     android:layout_weight="1"
-                    android:inputType="text"/>
+                    android:inputType="text" android:id="@+id/et_date"/>
 
         </LinearLayout>
 
