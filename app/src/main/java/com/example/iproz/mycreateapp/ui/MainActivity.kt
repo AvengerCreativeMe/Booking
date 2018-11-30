@@ -29,6 +29,8 @@ class MainActivity : AppCompatActivity(), ClickRoomListenter {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        mAuth = FirebaseAuth.getInstance()
+
         setSupportActionBar(toolbar)
 
         loadRoomData()

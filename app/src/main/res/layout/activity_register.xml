@@ -5,6 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/app_bg1"
         tools:context="ui.RegisterActivity">
 
     <include layout="@layout/toolbar_layout_clear"/>
@@ -17,7 +18,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_margin="8dp">
+            android:layout_margin="8dp"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintVertical_bias="0.311">
 
         <TextView
                 android:id="@+id/register_txt"
@@ -56,6 +59,7 @@
                 android:background="@drawable/button_selected"
                 android:layout_weight="1"
                 android:layout_gravity="center"
+                android:textColor="#fff"
                 android:text="Sign Up"/>
 
 
