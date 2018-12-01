@@ -21,8 +21,6 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        setSupportActionBar(toolbar_clear)
-
         auth = FirebaseAuth.getInstance()
         mViewLoading = CatLoadingView()
         mViewLoading?.setCanceledOnTouchOutside(false)
@@ -33,19 +31,6 @@ class RegisterActivity : AppCompatActivity() {
             createNewAccount(user, pass)
         }
     }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_back_out,menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (item?.itemId == R.id.back_out_menu){
-            finish()
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
 
     private fun createNewAccount(email: String, password: String) {
         if (email.trim().isNotEmpty() && password.trim().isNotEmpty()) {

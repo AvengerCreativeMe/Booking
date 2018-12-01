@@ -40,7 +40,7 @@
                       android:orientation="horizontal">
 
             <EditText
-                    android:id="@+id/roomName"
+                    android:id="@+id/et_roomCode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Room Code"
@@ -123,7 +123,7 @@
                     android:text="Detail"/>
 
             <EditText
-                    android:id="@+id/et_phoneNumber"
+                    android:id="@+id/et_detail"
                     android:background="@drawable/button_bg1"
                     android:padding="8dp"
                     android:layout_width="match_parent"

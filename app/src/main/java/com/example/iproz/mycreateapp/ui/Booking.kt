@@ -1,65 +1,83 @@
 package com.example.iproz.mycreateapp.ui
 
-import android.annotation.TargetApi
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
-import android.icu.text.SimpleDateFormat
-import android.os.Build
+import android.content.Context
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.annotation.RequiresApi
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.DatePicker
-import android.widget.TimePicker
 import android.widget.Toast
 import com.example.iproz.mycreateapp.R
+import com.example.iproz.mycreateapp.model.BookModel
+import com.google.firebase.firestore.FirebaseFirestore
+import com.roger.catloadinglibrary.CatLoadingView
 import kotlinx.android.synthetic.main.activity_booking.*
 import kotlinx.android.synthetic.main.toolbar_layout_default.*
+import java.text.SimpleDateFormat
 import java.util.*
+
+fun Context.bookActivity(code: String): Intent {
+    return Intent(this, Booking::class.java).apply {
+        this.putExtra("code", code)
+    }
+}
 
 class Booking : AppCompatActivity() {
 
-    @TargetApi(Build.VERSION_CODES.N)
-    @RequiresApi(Build.VERSION_CODES.N)
+    private val database = FirebaseFirestore.getInstance()
+    private var mViewLoading: CatLoadingView? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_booking)
+
+        mViewLoading = CatLoadingView()
+        mViewLoading?.setCanceledOnTouchOutside(false)
+
+
+        val code = intent?.getStringExtra("code")
+        et_roomCode.setText(code)
 
         setSupportActionBar(toolbar)
 
         Toast.makeText(this, "HelloWorld", Toast.LENGTH_LONG).show()
 
-        val c = Calendar.getInstance()
+        val calendar = Calendar.getInstance()
+
 
         et_date.setOnClickListener {
 
-            val year = c.get(Calendar.YEAR)
-            val month = c.get(Calendar.MONTH)
-            val day = c.get(Calendar.DAY_OF_MONTH)
+            val year = calendar.get(Calendar.YEAR)
+            val month = calendar.get(Calendar.MONTH)
+            val day = calendar.get(Calendar.DAY_OF_MONTH)
 
             val dpd = DatePickerDialog(
                 this,
                 DatePickerDialog.OnDateSetListener { view: DatePicker, mYear: Int, mMonth: Int, mDay: Int ->
-                    et_date.setText("" + mDay + "/" + mMonth + "/" + mYear)
+                    et_date.text = ("$mDay/$mMonth/$mYear")
                 }, year, month, day
             )
 
             dpd.show()
+
         }
 
         et_starting.setOnClickListener {
 
-            val hour = c.get(Calendar.HOUR_OF_DAY)
-            val minute = c.get(Calendar.MINUTE)
+            val hour = calendar.get(Calendar.HOUR_OF_DAY)
+            val minute = calendar.get(Calendar.MINUTE)
 
             val tpd = TimePickerDialog(
                 this,
                 TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
-                    c.set(Calendar.HOUR_OF_DAY, hour)
-                    c.set(Calendar.MINUTE, minute)
-                    et_starting.setText(SimpleDateFormat("HH:mm").format(c.time))
-                }, hour,minute, true
+                    calendar.set(Calendar.HOUR_OF_DAY, hour)
+                    calendar.set(Calendar.MINUTE, minute)
+                    val format = SimpleDateFormat("HH:mm").format(calendar.time)
+                    et_starting.text = format
+                }, hour, minute, true
             )
 
             tpd.show()
@@ -67,20 +85,23 @@ class Booking : AppCompatActivity() {
 
         et_ending.setOnClickListener {
 
-            val hour = c.get(Calendar.HOUR_OF_DAY)
-            val minute = c.get(Calendar.MINUTE)
+            val hour = calendar.get(Calendar.HOUR_OF_DAY)
+            val minute = calendar.get(Calendar.MINUTE)
 
             val tpd = TimePickerDialog(
                 this,
                 TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
-                    c.set(Calendar.HOUR_OF_DAY, hour)
-                    c.set(Calendar.MINUTE, minute)
-                    et_ending.setText(SimpleDateFormat("HH:mm").format(c.time))
-                }, hour,minute, true
+                    calendar.set(Calendar.HOUR_OF_DAY, hour)
+                    calendar.set(Calendar.MINUTE, minute)
+                    val format = SimpleDateFormat("HH:mm").format(calendar.time)
+                    et_ending.text = format
+                }, hour, minute, true
             )
 
             tpd.show()
         }
+
+        buttonSaveOnClick()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -95,4 +116,41 @@ class Booking : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
 
     }
+
+    fun setShowMessage(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+    }
+
+    fun saveBooking(bookModel: BookModel) {
+        mViewLoading?.show(supportFragmentManager, "")
+
+        val colRef = database.collection("Book").document()
+        colRef.set(bookModel)
+            .addOnSuccessListener {
+                mViewLoading?.dismiss()
+                setShowMessage("Success")
+                finish()
+
+            }
+            .addOnFailureListener {
+                setShowMessage(it.message.toString())
+                mViewLoading?.dismiss()
+            }
+    }
+
+    fun buttonSaveOnClick() {
+        btn_save.setOnClickListener {
+            val bookModel = BookModel(
+                et_roomCode.text.toString(),
+                et_detail.text.toString(),
+                et_date.text.toString(),
+                et_starting.text.toString(),
+                et_ending.text.toString()
+            )
+
+            saveBooking(bookModel)
+        }
+    }
+
+
 }

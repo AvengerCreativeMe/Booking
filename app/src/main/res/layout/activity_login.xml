@@ -26,17 +26,18 @@
 
         <ImageView
                 android:id="@+id/logo_login"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_launcher"
-                android:layout_gravity="center_horizontal"
-                tools:src="@tools:sample/avatars"/>
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:src="@drawable/penguin"
+                android:layout_gravity="center_horizontal"/>
 
         <EditText
                 android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:drawableLeft="@drawable/ic_email"
+                android:drawablePadding="8dp"
                 android:background="@drawable/button_bg1"
                 android:hint="USERNAME"
                 android:inputType="textEmailAddress"
@@ -46,6 +47,8 @@
                 android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_lock"
+                android:drawablePadding="8dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/button_bg1"
                 android:hint="PASSWORD"
@@ -70,6 +73,7 @@
                 android:gravity="center"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:padding="8dp"
                 android:textColor="@color/color_bg3"
                 android:text="Register Here!"/>
 

@@ -26,7 +26,10 @@ class MainActivity : AppCompatActivity(), ClickRoomListenter {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //set hide title
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+
 
         loadRoomData()
     }
@@ -89,8 +92,6 @@ class MainActivity : AppCompatActivity(), ClickRoomListenter {
     }
 
     override fun onClickedItem(code: String) {
-
-        startActivity(Intent(this,CalendarActivity::class.java))
-        Toast.makeText(this, code, Toast.LENGTH_LONG).show()
+        startActivity(calendarActivity(code))
     }
 }

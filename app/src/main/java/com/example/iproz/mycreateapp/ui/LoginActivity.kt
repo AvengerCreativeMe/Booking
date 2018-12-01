@@ -73,15 +73,10 @@ class LoginActivity : AppCompatActivity() {
         if (user != null) {
             val name = user.displayName.toString()
             val email = user.email.toString()
-            val photoUrl = user.photoUrl
 
             StoreUser.userModel = UserModel(
                 name = name,
                 email = email)
-
-            val emailVerify = user.isEmailVerified
-
-            val token = user.getIdToken(emailVerify)
 
             startActivity(Intent(this, MainActivity::class.java))
             finish()
