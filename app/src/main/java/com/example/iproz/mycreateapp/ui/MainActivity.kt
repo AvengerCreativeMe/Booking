@@ -13,7 +13,6 @@ import com.example.iproz.mycreateapp.callback.ClickRoomListenter
 import com.example.iproz.mycreateapp.model.CreateClass
 import com.example.iproz.mycreateapp.model.RoomModel
 import com.example.iproz.mycreateapp.model.StoreClass
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar_layout_default.*

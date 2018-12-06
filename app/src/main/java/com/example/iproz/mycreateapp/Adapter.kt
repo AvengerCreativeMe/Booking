@@ -6,28 +6,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.iproz.mycreateapp.callback.ClickRoomListenter
-import com.example.iproz.mycreateapp.model.Class
 import com.example.iproz.mycreateapp.model.CreateClass
 import kotlinx.android.synthetic.main.card_view.view.*
-import java.util.ArrayList
+import kotlin.collections.ArrayList
 
-class Adapter(val classdata:ArrayList<CreateClass>,
-              val context: Context,
-              val callback: ClickRoomListenter
+class Adapter(
+    val classdata: ArrayList<CreateClass>,
+    val context: Context,
+    val callback: ClickRoomListenter
 )
-    : RecyclerView.Adapter<ViewHoder>(){
+    : RecyclerView.Adapter<ViewHolder>(){
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHoder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view= LayoutInflater.from(context).inflate(R.layout.card_view,parent,false)
 
-        return ViewHoder(view)
+        return ViewHolder(view)
     }
 
     override fun getItemCount(): Int {
         return classdata.size
     }
 
-    override fun onBindViewHolder(holder: ViewHoder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.name.text = classdata[position].className
         holder.comment.text = classdata[position].comment
         holder.classimg.setImageResource(R.drawable.img_c)
@@ -37,7 +37,7 @@ class Adapter(val classdata:ArrayList<CreateClass>,
     }
 }
 
-class ViewHoder(itemView: View): RecyclerView.ViewHolder(itemView){
+class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
     //ตาม layout
     var name = itemView.tv_cardTitle!!
     var comment = itemView.tv_cardComment!!

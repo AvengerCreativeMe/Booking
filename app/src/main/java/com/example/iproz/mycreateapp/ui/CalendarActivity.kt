@@ -4,17 +4,18 @@ import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.CalendarView
 import android.widget.Toast
+import com.example.iproz.mycreateapp.Adapter
 import com.example.iproz.mycreateapp.R
-import com.example.iproz.mycreateapp.model.EventModel
-import com.example.iproz.mycreateapp.model.RoomModel
+import com.example.iproz.mycreateapp.model.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 import com.roger.catloadinglibrary.CatLoadingView
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar_layout_default.*
 
 fun Context.calendarActivity(code: String): Intent {
@@ -26,6 +27,9 @@ fun Context.calendarActivity(code: String): Intent {
 private const val CODE = "key_code"
 
 class CalendarActivity : AppCompatActivity() {
+    private val database = FirebaseFirestore.getInstance()
+
+    val events = arrayListOf<EventModel>()
 
     var code: String? = null
     //Loading Animation
@@ -113,10 +117,59 @@ class CalendarActivity : AppCompatActivity() {
                     Toast.makeText(this, events.toString(), Toast.LENGTH_LONG).show()
                 }
             }
+            loadEvent()
             mViewLoading?.dismiss()
         }.addOnFailureListener {
             mViewLoading?.dismiss()
         }
+    }
+
+    fun setRecyclerView() {
+        events.forEach { eventModel ->
+            val event = EventModel(
+                user = eventModel.user,
+                date = eventModel.date,
+                describe = eventModel.describe,
+                timeStart = eventModel.timeStart,
+                timeEnd = eventModel.timeEnd
+            )
+
+            StoreEvent.listEvent.add(event)
+        }
+
+//        val CalAdapter = Adapter(StoreEvent.listEvent, this, this)
+//        recyclerView.layoutManager = LinearLayoutManager(this)
+//        recyclerView.adapter = CalAdapter
+    }
+
+    fun loadEvent() {
+        database.collection("Book").get()
+            .addOnSuccessListener {
+                val docs = it.documents
+                for (doc in docs) {
+
+                    val code:String = doc.get("code") as String
+                    val date = doc.get("date") as String
+                    val detail = doc.get("detail") as String
+                    val timeEnd = doc.get("timeEnd") as String
+                    val timeStart = doc.get("timeStart") as String
+
+                    val eventModel = EventModel(
+                        code,
+                        date,
+                        detail,
+                        timeEnd,
+                        timeStart
+                    )
+
+                    events.add(eventModel)
+                }
+
+                setRecyclerView()
+            }
+            .addOnFailureListener {
+                Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
+            }
     }
 
 

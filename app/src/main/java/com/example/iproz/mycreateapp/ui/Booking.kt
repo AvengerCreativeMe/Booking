@@ -42,6 +42,8 @@ class Booking : AppCompatActivity() {
         et_roomCode.setText(code)
 
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+
 
         Toast.makeText(this, "HelloWorld", Toast.LENGTH_LONG).show()
 

@@ -6,5 +6,9 @@ data class EventModel(
     var describe: String,
     var timeStart: String,
     var timeEnd: String
-
 )
+
+
+object StoreEvent {
+    val listEvent = arrayListOf<EventModel>()
+}

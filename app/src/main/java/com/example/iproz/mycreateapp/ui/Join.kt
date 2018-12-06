@@ -14,6 +14,8 @@ class Join : AppCompatActivity() {
         setContentView(R.layout.activity_join)
 
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

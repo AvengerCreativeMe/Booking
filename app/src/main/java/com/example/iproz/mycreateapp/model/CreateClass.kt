@@ -1,8 +1,5 @@
 package com.example.iproz.mycreateapp.model
 
-import android.os.Parcel
-import android.os.Parcelable
-
 data class CreateClass (
     var className: String,
     var passRoom:String,
