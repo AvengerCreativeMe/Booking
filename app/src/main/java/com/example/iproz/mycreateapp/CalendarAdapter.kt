@@ -17,7 +17,7 @@ class CalendarAdapter(
     : RecyclerView.Adapter<EventViewHolder>() {
 
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
-        holder.user.text = classdata[position].user
+        holder.bookUser.text = classdata[position].bookUser
         holder.date.text = classdata[position].date
         holder.describe.text = classdata[position].describe
         holder.timeStart.text = classdata[position].timeStart
@@ -43,5 +43,5 @@ class EventViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var timeEnd = itemView.tv_cardTimeEnd!!
     var date = itemView.tv_cardDate!!
     var describe = itemView.tv_cardDetail!!
-    var user = itemView.tv_cardUser!!
+    var bookUser = itemView.tv_cardUser!!
 }

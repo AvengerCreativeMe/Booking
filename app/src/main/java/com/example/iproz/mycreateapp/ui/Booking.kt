@@ -12,6 +12,7 @@ import android.widget.DatePicker
 import android.widget.Toast
 import com.example.iproz.mycreateapp.R
 import com.example.iproz.mycreateapp.model.BookModel
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.roger.catloadinglibrary.CatLoadingView
 import kotlinx.android.synthetic.main.activity_booking.*
@@ -40,6 +41,9 @@ class Booking : AppCompatActivity() {
 
         val code = intent?.getStringExtra("code")
         et_roomCode.setText(code)
+
+        val bookUser = FirebaseAuth.getInstance().currentUser?.email ?: ""
+        et_bookUser.setText(bookUser)
 
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
@@ -143,6 +147,7 @@ class Booking : AppCompatActivity() {
     fun buttonSaveOnClick() {
         btn_save.setOnClickListener {
             val bookModel = BookModel(
+                et_bookUser.text.toString(),
                 et_roomCode.text.toString(),
                 et_detail.text.toString(),
                 et_date.text.toString(),

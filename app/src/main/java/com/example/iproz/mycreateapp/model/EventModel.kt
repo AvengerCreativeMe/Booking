@@ -1,7 +1,8 @@
 package com.example.iproz.mycreateapp.model
 
 data class EventModel(
-    var user: String,
+    var bookUser:String,
+    var code: String,
     var date: String,
     var describe: String,
     var timeStart: String,

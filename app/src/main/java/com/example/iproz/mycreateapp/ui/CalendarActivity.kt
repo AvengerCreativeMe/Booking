@@ -90,14 +90,14 @@ class CalendarActivity : AppCompatActivity() {
 
         val database = FirebaseFirestore.getInstance()
         val docRef = database.collection("Book")
-        val query = docRef
-            .whereEqualTo("code", code)
+        val query = docRef.whereEqualTo("code", code)
         query.get().addOnSuccessListener {
             val docs = it.documents
             val events = arrayListOf<EventModel>()
 
             for (doc in docs) {
-
+                val bookUser = doc.get("bookUser") as String
+                val code = doc.get("code") as String
                 val dateStr = doc.get("date") as String
                 val describe = doc.get("detail") as String
                 val timeStart = doc.get("timeStart") as String
@@ -106,7 +106,8 @@ class CalendarActivity : AppCompatActivity() {
                 val queryWithDate = docRef.whereEqualTo("date", date)
                 queryWithDate.get().addOnSuccessListener {
                     val eventModel = EventModel(
-                        user,
+                        bookUser,
+                        code,
                         dateStr,
                         describe,
                         timeStart,
@@ -114,7 +115,6 @@ class CalendarActivity : AppCompatActivity() {
                     )
 
                     events.add(eventModel)
-                    Toast.makeText(this, events.toString(), Toast.LENGTH_LONG).show()
                 }
             }
             loadEvent()
@@ -127,7 +127,8 @@ class CalendarActivity : AppCompatActivity() {
     fun setEventRecyclerView() {
         events.forEach { eventModel ->
             val event = EventModel(
-                user = eventModel.user,
+                bookUser = eventModel.bookUser,
+                code = eventModel.code,
                 date = eventModel.date,
                 describe = eventModel.describe,
                 timeStart = eventModel.timeStart,
@@ -148,13 +149,15 @@ class CalendarActivity : AppCompatActivity() {
                 val docs = it.documents
                 for (doc in docs) {
 
-                    val code:String = doc.get("code") as String
+                    val bookUser = doc.get("bookUser") as String
+                    val code: String = doc.get("code") as String
                     val date = doc.get("date") as String
                     val detail = doc.get("detail") as String
                     val timeEnd = doc.get("timeEnd") as String
                     val timeStart = doc.get("timeStart") as String
 
                     val eventModel = EventModel(
+                        bookUser,
                         code,
                         date,
                         detail,
