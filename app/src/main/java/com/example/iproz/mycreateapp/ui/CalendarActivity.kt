@@ -9,13 +9,13 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.CalendarView
 import android.widget.Toast
-import com.example.iproz.mycreateapp.Adapter
+import com.example.iproz.mycreateapp.CalendarAdapter
 import com.example.iproz.mycreateapp.R
 import com.example.iproz.mycreateapp.model.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.roger.catloadinglibrary.CatLoadingView
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_calendar.*
 import kotlinx.android.synthetic.main.toolbar_layout_default.*
 
 fun Context.calendarActivity(code: String): Intent {
@@ -124,7 +124,7 @@ class CalendarActivity : AppCompatActivity() {
         }
     }
 
-    fun setRecyclerView() {
+    fun setEventRecyclerView() {
         events.forEach { eventModel ->
             val event = EventModel(
                 user = eventModel.user,
@@ -137,9 +137,9 @@ class CalendarActivity : AppCompatActivity() {
             StoreEvent.listEvent.add(event)
         }
 
-//        val CalAdapter = Adapter(StoreEvent.listEvent, this, this)
-//        recyclerView.layoutManager = LinearLayoutManager(this)
-//        recyclerView.adapter = CalAdapter
+        val calAdapter = CalendarAdapter(StoreEvent.listEvent, this)
+        calRecyclerView.layoutManager = LinearLayoutManager(this)
+        calRecyclerView.adapter = calAdapter
     }
 
     fun loadEvent() {
@@ -165,7 +165,7 @@ class CalendarActivity : AppCompatActivity() {
                     events.add(eventModel)
                 }
 
-                setRecyclerView()
+                setEventRecyclerView()
             }
             .addOnFailureListener {
                 Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()

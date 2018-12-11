@@ -12,16 +12,11 @@ import java.util.ArrayList
 class CalendarAdapter(
     val classdata: ArrayList<EventModel>,
     val context: Context
-//    ,val callback: ClickRoomListenter
 )
 
-    : RecyclerView.Adapter<ViewHolder>() {
+    : RecyclerView.Adapter<EventViewHolder>() {
 
-    override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun onBindViewHolder(holder: ViewHolder2, position: Int) {
+    override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
         holder.user.text = classdata[position].user
         holder.date.text = classdata[position].date
         holder.describe.text = classdata[position].describe
@@ -30,11 +25,10 @@ class CalendarAdapter(
 
     }
 
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.calendar_card_view, parent, false)
 
-        return ViewHolder(view)
+        return EventViewHolder(view)
     }
 
     override fun getItemCount(): Int {
@@ -42,21 +36,12 @@ class CalendarAdapter(
     }
 
 }
-//        val code = classdata[position].passRoom
-//        holder.setHolderClicked(callback, code)
 
-class ViewHolder2(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class EventViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     //ตาม layout
     var timeStart = itemView.tv_cardTimeStart!!
     var timeEnd = itemView.tv_cardTimeEnd!!
     var date = itemView.tv_cardDate!!
     var describe = itemView.tv_cardDetail!!
     var user = itemView.tv_cardUser!!
-
-//    //send data to activity
-//    fun setHolderClicked(callback: ClickRoomListenter, code: String) {
-//        itemView.setOnClickListener {
-//            callback.onClickedItem(code)
-//        }
-//    }
 }

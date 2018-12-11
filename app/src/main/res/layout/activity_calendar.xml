@@ -9,6 +9,7 @@
     <include layout="@layout/appbar_layout_default"/>
 
     <LinearLayout
+            android:layout_marginTop="50dp"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent" tools:layout_editor_absoluteY="81dp"

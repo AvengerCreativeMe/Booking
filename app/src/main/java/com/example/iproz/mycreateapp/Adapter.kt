@@ -30,7 +30,7 @@ class Adapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.name.text = classdata[position].className
         holder.comment.text = classdata[position].comment
-        holder.classimg.setImageResource(R.drawable.img_c)
+        holder.classimg.setImageResource(R.drawable.penguin)
 
         val code = classdata[position].passRoom
         holder.setHolderClicked(callback, code)
